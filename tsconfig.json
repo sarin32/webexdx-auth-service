@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "build",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["es2018"],
+    "module": "commonjs",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "pretty": true,
+    "strict": true,
+    "target": "es2018",
+    "paths": {
+      "@i/*": ["./src/app/interfaces/*"],
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

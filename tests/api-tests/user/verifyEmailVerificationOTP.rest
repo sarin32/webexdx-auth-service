@@ -1,0 +1,9 @@
+
+POST {{baseUrl}}/user/verifyEmailVerificationOTP HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
+
+
+{
+  "otp": "001059"
+}
