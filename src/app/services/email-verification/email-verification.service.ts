@@ -129,7 +129,7 @@ class EmailVerificationService implements EmailVerificationServiceInterface {
       to: emailId,
       subject: 'OTP for your email verification',
       html: body,
-      senderName: 'IntelliExam Admin',
+      senderName: 'WEBEXDX Admin',
     });
   }
 }
