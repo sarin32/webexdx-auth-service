@@ -28,8 +28,8 @@ export async function tokenMiddleware(ctx: Context, next: Next) {
   }
 
   // Assert payload type to JwtPayload
-  const { userId, roleId } = payload as JwtPayload;
-  if (!userId || !roleId) {
+  const { userId } = payload as JwtPayload;
+  if (!userId) {
     throw new AuthorizationError(
       'User ID or Role ID not found in token payload'
     );
@@ -37,7 +37,6 @@ export async function tokenMiddleware(ctx: Context, next: Next) {
 
   ctx.state.user = {
     userId: objectId(userId),
-    roleId: objectId(roleId),
   };
 
   return await next();

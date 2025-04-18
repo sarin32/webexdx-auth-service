@@ -12,7 +12,7 @@ class UserRepository implements UserRepositoryInterface {
 
   async createUser({ email, name, password, salt }: CreateUserParams) {
     const result = await this.modal.insertOne({
-      email: { isVerified: true, value: email },
+      email: { isVerified: false, value: email },
       name,
       password,
       salt,

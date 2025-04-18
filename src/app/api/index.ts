@@ -3,7 +3,7 @@ import userRoute from './user/user.route';
 
 const router: Router = [
   {
-    path: '/',
+    path: '',
     children: userRoute,
   },
 ];
