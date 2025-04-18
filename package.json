@@ -2,9 +2,9 @@
   "scripts": {
     "lint": "eslint .",
     "fix": "eslint --fix .",
-    "build:dev": "tsc",
+    "build": "tsc",
+    "start": "nodemon src/index.ts",
     "build:prod": "tsc",
-    "start:dev": "nodemon src/index.ts",
     "start:prod": "node src/index.js"
   },
   "engines": {
