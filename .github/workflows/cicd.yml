@@ -1,0 +1,27 @@
+name: Build and Push Docker Image and Deploy
+
+on:
+  push:
+    branches:
+      - main # Change this to your main branch or the branch you want to trigger the action
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to GitHub Container Registry
+        run: docker login --username ${{github.actor}} --password ${{secrets.GH_PAT}} ghcr.io
+
+      - name: Build the Docker image
+        run: docker build -t ghcr.io/${{ github.repository }}:latest .
+        working-directory: ./
+
+      - name: Push Docker image to GHCR
+        run: docker push ghcr.io/${{ github.repository }}:latest
+
+      - name: Deploy the pushed image
+        run: curl ${{secrets.RENDER_DEPLOYMENT_HOOK}}
