@@ -1,0 +1,28 @@
+name: Lint Check
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install typescript eslint
+
+      - name: Run Lint
+        run: |
+          if ! npm run lint; then
+            echo "Linting failed due to warnings"
+            exit 1
+          fi
