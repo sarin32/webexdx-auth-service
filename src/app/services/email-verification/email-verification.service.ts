@@ -29,21 +29,21 @@ class EmailVerificationService implements EmailVerificationServiceInterface {
   async hasAccessToSendEmailVerificationEmail({
     userId,
   }: HasAccessParams): Promise<boolean> {
-    const respose = await rolesService.getModuleRoleInfo({
+    const response = await rolesService.getModuleRoleInfo({
       userId,
       module: 'emailVerification',
     });
-    return respose?.send || false;
+    return response?.send || false;
   }
 
   async hasAccessToVerifyEmailVerificationOTP({
     userId,
   }: HasAccessParams): Promise<boolean> {
-    const respose = await rolesService.getModuleRoleInfo({
+    const response = await rolesService.getModuleRoleInfo({
       userId,
       module: 'emailVerification',
     });
-    return respose?.verify || false;
+    return response?.verify || false;
   }
 
   public async sendEmailForVerification({
