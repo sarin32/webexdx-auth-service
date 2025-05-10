@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import * as Joi from 'joi';
 
 // Auth schemas
 export const signUpSchema = Joi.object({
