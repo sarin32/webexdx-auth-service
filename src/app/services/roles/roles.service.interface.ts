@@ -22,7 +22,8 @@ export interface GetModulePermissionInfoParams<ModuleNameT extends ModuleName> {
 /**
  * Result of module permission information
  */
-export type GetModulePermissionInfoResult<ModuleNameT extends ModuleName> = RolePermissions[ModuleNameT];
+export type GetModulePermissionInfoResult<ModuleNameT extends ModuleName> =
+  RolePermissions[ModuleNameT];
 
 /**
  * Parameters for creating a non-verified user role

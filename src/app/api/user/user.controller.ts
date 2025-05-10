@@ -1,5 +1,9 @@
 import { Context } from 'koa';
-import { signUpSchema, signInSchema, verifyEmailOTPSchema } from './user.schema';
+import {
+  signUpSchema,
+  signInSchema,
+  verifyEmailOTPSchema,
+} from './user.schema';
 import { validateRequest } from '../../utils/schema-validator';
 import { userService } from '../../services/user/user.service';
 import { ForbiddenError } from '../../errors';

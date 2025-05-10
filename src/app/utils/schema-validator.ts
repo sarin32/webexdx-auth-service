@@ -11,7 +11,6 @@ export function validateRequest<ValueType>(schema: Joi.Schema, data: unknown) {
       allowUnknown: true,
       errors: { escapeHtml: true },
     });
-    
 
   if (error) {
     throw new BadRequestError(error.message);
