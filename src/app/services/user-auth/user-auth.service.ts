@@ -7,7 +7,7 @@ import {
 } from './user-auth.service.interface';
 import { LOGIN_TOKEN_LIFETIME } from '../../config/config';
 import { userRepository } from '../../database';
-import { AuthorizationError, ConflictError } from '../../errors';
+import { AuthorizationError, ConflictError } from '@webexdx/koa-wrap/errors';
 import {
   generatePassword,
   generateSalt,
