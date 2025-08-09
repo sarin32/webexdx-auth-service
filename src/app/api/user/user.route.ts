@@ -5,9 +5,8 @@ import {
   signUp,
   verifyEmailVerificationOTP,
 } from './user.controller';
-import { tokenMiddleware } from '../../middlewares';
-import { Router } from '@webexdx/koa-wrap';
-import { HTTPMethod } from '@webexdx/koa-wrap/build/src/router/interface';
+import { Router, HTTPMethod } from '@webexdx/koa-wrap/server';
+import { authMiddleware } from '../../middlewares/auth.middleware';
 
 const router: Router = [
   {
@@ -23,19 +22,19 @@ const router: Router = [
   {
     method: HTTPMethod.POST,
     path: '/sendEmailForVerification',
-    middlewares: tokenMiddleware,
+    middlewares: authMiddleware,
     handler: sendEmailForVerification,
   },
   {
     method: HTTPMethod.POST,
     path: '/verifyEmailVerificationOTP',
-    middlewares: tokenMiddleware,
+    middlewares: authMiddleware,
     handler: verifyEmailVerificationOTP,
   },
   {
     method: HTTPMethod.POST,
     path: '/getSelfInfo',
-    middlewares: tokenMiddleware,
+    middlewares: authMiddleware,
     handler: getSelfInfo,
   },
 ];

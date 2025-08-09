@@ -7,7 +7,7 @@ import {
   AuthorizationError,
   ConflictError,
   ForbiddenError,
-} from '../../errors';
+} from '@webexdx/koa-wrap/errors';
 import emailUtil from '../../utils/email-util';
 import { generateRandomString } from '../../utils/string-util';
 import { generateTemplate } from '../../utils/template-util';

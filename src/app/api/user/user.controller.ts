@@ -6,7 +6,7 @@ import {
 } from './user.schema';
 import { validateRequest } from '../../utils/schema-validator';
 import { userService } from '../../services/user/user.service';
-import { ForbiddenError } from '../../errors';
+import { ForbiddenError } from '@webexdx/koa-wrap/errors';
 import { userAuthService } from '../../services/user-auth/user-auth.service';
 import { emailVerificationService } from '../../services/email-verification/email-verification.service';
 
