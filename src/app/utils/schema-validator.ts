@@ -1,5 +1,5 @@
-import * as Joi from 'joi';
 import { BadRequestError } from '@webexdx/koa-wrap/errors';
+import type * as Joi from 'joi';
 
 export function validateRequest<ValueType>(schema: Joi.Schema, data: unknown) {
   const {

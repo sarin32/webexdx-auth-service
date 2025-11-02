@@ -1,5 +1,5 @@
 import { userModal } from '../../modals';
-import {
+import type {
   CreateUserParams,
   FindUserByEmailParams,
   FindUserByIdParams,
@@ -42,7 +42,7 @@ class UserRepository implements UserRepositoryInterface {
       {
         email: { isVerified: true, value: email },
       },
-      { projection: { _id: 1 } }
+      { projection: { _id: 1 } },
     );
 
     return Boolean(result);
@@ -53,7 +53,7 @@ class UserRepository implements UserRepositoryInterface {
       {
         _id: id,
       },
-      { projection: { password: 0, salt: 0 } }
+      { projection: { password: 0, salt: 0 } },
     );
 
     return result;
@@ -62,7 +62,7 @@ class UserRepository implements UserRepositoryInterface {
   async markUserAsVerified({ userId }: MarkUserAsVerifiedParams) {
     const response = await this.modal.updateOne(
       { _id: userId },
-      { $set: { 'email.isVerified': true } }
+      { $set: { 'email.isVerified': true } },
     );
 
     if (!response.acknowledged || response.modifiedCount !== 1) {

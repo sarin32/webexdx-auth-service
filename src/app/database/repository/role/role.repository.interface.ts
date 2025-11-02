@@ -1,5 +1,5 @@
-import { ObjectId, WithId } from 'mongodb';
-import {
+import type { ObjectId, WithId } from 'mongodb';
+import type {
   RolePermissions as RoleModalPermissions,
   RolesSchema,
 } from '../../modals/roles.modal.interface';
@@ -66,7 +66,7 @@ export interface RoleRepositoryInterface {
    * Gets module-specific role information for a user
    */
   getModuleRoleInfo<ModuleNameT extends ModuleName>(
-    params: GetModulePermissionInfoParams<ModuleNameT>
+    params: GetModulePermissionInfoParams<ModuleNameT>,
   ): Promise<GetModulePermissionInfoResult<ModuleNameT>>;
 
   /**

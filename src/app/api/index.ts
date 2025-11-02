@@ -1,4 +1,4 @@
-import { Router } from '@webexdx/koa-wrap/server';
+import type { Router } from '@webexdx/koa-wrap/server';
 import userRoute from './user/user.route';
 
 const router: Router = [

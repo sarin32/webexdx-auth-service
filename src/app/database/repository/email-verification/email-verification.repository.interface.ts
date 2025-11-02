@@ -1,5 +1,5 @@
-import { ObjectId, WithId } from 'mongodb';
-import { EmailVerificationSchema } from '../../modals/email-verification.modal.interface';
+import type { ObjectId, WithId } from 'mongodb';
+import type { EmailVerificationSchema } from '../../modals/email-verification.modal.interface';
 
 /**
  * Parameters for creating an email verification record
@@ -41,14 +41,14 @@ export interface EmailVerificationRepositoryInterface {
    * Creates a new email verification record
    */
   createEmailVerification(
-    params: CreateEmailVerificationParams
+    params: CreateEmailVerificationParams,
   ): Promise<{ id: ObjectId }>;
 
   /**
    * Gets email verification information for a user
    */
   getEmailVerification(
-    params: GetEmailVerificationParams
+    params: GetEmailVerificationParams,
   ): Promise<WithId<EmailVerificationSchema> | null>;
 
   /**

@@ -1,4 +1,4 @@
-import { Document } from 'mongodb';
+import type { Document } from 'mongodb';
 
 export interface UserSchema extends Document {
   name: string;

@@ -6,7 +6,7 @@ export interface RandomStringOptions {
 
 export function generateRandomString(
   length: number,
-  options: RandomStringOptions
+  options: RandomStringOptions,
 ): string {
   let characters = '';
 

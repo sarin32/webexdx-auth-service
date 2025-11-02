@@ -1,19 +1,20 @@
 import {
-  VERIFICATION_MAX_RESEND_INTERVAL,
-  VERIFICATION_MAX_TRIES,
-} from '../../config';
-import { emailVerificationRepository } from '../../database';
-import {
   AuthorizationError,
   ConflictError,
   ForbiddenError,
 } from '@webexdx/koa-wrap/errors';
+import {
+  VERIFICATION_MAX_RESEND_INTERVAL,
+  VERIFICATION_MAX_TRIES,
+} from '../../config';
+import { emailVerificationRepository } from '../../database';
 import emailUtil from '../../utils/email-util';
 import { generateRandomString } from '../../utils/string-util';
 import { generateTemplate } from '../../utils/template-util';
+import { rolesService } from '../roles/roles.service';
 import { userService } from '../user/user.service';
 import { userAuthService } from '../user-auth/user-auth.service';
-import {
+import type {
   EmailVerificationServiceInterface,
   HasAccessParams,
   SendEmailForVerificationParams,
@@ -21,7 +22,6 @@ import {
   VerifyEmailVerificationOTPParams,
   VerifyEmailVerificationOTPResult,
 } from './email-verification.service.interface';
-import { rolesService } from '../roles/roles.service';
 
 class EmailVerificationService implements EmailVerificationServiceInterface {
   private readonly repository = emailVerificationRepository;
@@ -61,13 +61,13 @@ class EmailVerificationService implements EmailVerificationServiceInterface {
 
       if (timeSinceLastSend < VERIFICATION_MAX_RESEND_INTERVAL) {
         throw new ForbiddenError(
-          'Resend request is not allowed within 1 minute of the previous request'
+          'Resend request is not allowed within 1 minute of the previous request',
         );
       }
 
       if (existingVerification.verificationTry >= VERIFICATION_MAX_TRIES) {
         throw new ForbiddenError(
-          'Email verification tries have been exhausted'
+          'Email verification tries have been exhausted',
         );
       }
 

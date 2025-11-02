@@ -1,9 +1,10 @@
 import * as jwt from 'jsonwebtoken';
-import { SECRET_TOKEN } from '../config/config';
+import type { Context } from 'koa';
+import { COOKIE_SETTINGS, SECRET_TOKEN } from '../config/config';
 
 export async function generateSignature(
   payload: object,
-  expiresIn: number
+  expiresIn: number,
 ): Promise<string> {
   return await jwt.sign(payload as object, SECRET_TOKEN, { expiresIn });
 }
@@ -20,4 +21,16 @@ export async function validateSignature(token: string) {
     }
     throw error;
   }
+}
+
+export async function setTokenCookie(
+  ctx: Context,
+  accessToken: string,
+): Promise<void> {
+  ctx.cookies.set('access_token', accessToken, {
+    httpOnly: COOKIE_SETTINGS.HTTP_ONLY,
+    secure: COOKIE_SETTINGS.SECURE,
+    domain: COOKIE_SETTINGS.DOMAIN,
+    path: COOKIE_SETTINGS.PATH,
+  });
 }

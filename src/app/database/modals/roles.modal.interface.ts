@@ -1,4 +1,4 @@
-import { Document, ObjectId } from 'mongodb';
+import type { Document, ObjectId } from 'mongodb';
 
 export interface EmailVerificationPermission {
   send: boolean;

@@ -11,7 +11,7 @@ export async function generatePassword(password: string, salt: string) {
 export async function validatePassword(
   enteredPassword: string,
   savedPassword: string,
-  salt: string
+  salt: string,
 ): Promise<boolean> {
   const hashedEnteredPassword = await generatePassword(enteredPassword, salt);
   return hashedEnteredPassword === savedPassword;

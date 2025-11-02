@@ -1,4 +1,8 @@
-import { Transporter, SendMailOptions, createTransport } from 'nodemailer';
+import {
+  createTransport,
+  type SendMailOptions,
+  type Transporter,
+} from 'nodemailer';
 import { EMAIL_SETTINGS } from '../config/config';
 
 // Define a custom type for email options

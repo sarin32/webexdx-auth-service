@@ -5,7 +5,7 @@ dotEnv.config();
 
 const env = process.env;
 
-export const PORT = Number(env.PORT!);
+export const PORT = Number(env.PORT);
 
 export const NODE_ENV = env.NODE_ENV;
 
@@ -20,4 +20,12 @@ export const EMAIL_SETTINGS = {
   SERVICE_PROVIDER: 'gmail',
   USER_ID: env.EMAIL_USER_ID,
   PASSWORD: env.EMAIL_PASSWORD,
+};
+
+export const COOKIE_SETTINGS = {
+  ACCESS_TOKEN_KEY: 'access_token',
+  HTTP_ONLY: env.COOKIE_HTTP_ONLY === 'true',
+  SECURE: env.COOKIE_SECURE === 'true',
+  DOMAIN: env.COOKIE_DOMAIN,
+  PATH: env.COOKIE_PATH,
 };

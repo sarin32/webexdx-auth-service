@@ -1,14 +1,15 @@
-import { Context } from 'koa';
+import { ForbiddenError } from '@webexdx/koa-wrap/errors';
+import type { Context } from 'koa';
+import { COOKIE_SETTINGS } from '../../config';
+import { emailVerificationService } from '../../services/email-verification/email-verification.service';
+import { userService } from '../../services/user/user.service';
+import { userAuthService } from '../../services/user-auth/user-auth.service';
+import { validateRequest } from '../../utils/schema-validator';
 import {
-  signUpSchema,
   signInSchema,
+  signUpSchema,
   verifyEmailOTPSchema,
 } from './user.schema';
-import { validateRequest } from '../../utils/schema-validator';
-import { userService } from '../../services/user/user.service';
-import { ForbiddenError } from '@webexdx/koa-wrap/errors';
-import { userAuthService } from '../../services/user-auth/user-auth.service';
-import { emailVerificationService } from '../../services/email-verification/email-verification.service';
 
 export async function signUp(ctx: Context) {
   const { name, email, password } = validateRequest<{
@@ -26,7 +27,14 @@ export async function signIn(ctx: Context) {
     password: string;
   }>(signInSchema, ctx.request.body);
 
-  ctx.body = await userAuthService.signIn({ email, password });
+  const response = await userAuthService.signIn({ email, password });
+  ctx.cookies.set('access_token', response.token, {
+    httpOnly: COOKIE_SETTINGS.HTTP_ONLY,
+    secure: COOKIE_SETTINGS.SECURE,
+    domain: COOKIE_SETTINGS.DOMAIN,
+    path: COOKIE_SETTINGS.PATH,
+  });
+  ctx.body = response;
 }
 
 export async function sendEmailForVerification(ctx: Context) {
@@ -38,7 +46,7 @@ export async function sendEmailForVerification(ctx: Context) {
     }))
   ) {
     throw new ForbiddenError(
-      'You dont have the access to sent verification email'
+      'You dont have the access to sent verification email',
     );
   }
 
@@ -60,7 +68,7 @@ export async function verifyEmailVerificationOTP(ctx: Context) {
     }))
   ) {
     throw new ForbiddenError(
-      'You dont have the access to enter the verification OTP'
+      'You dont have the access to enter the verification OTP',
     );
   }
 

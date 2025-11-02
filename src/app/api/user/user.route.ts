@@ -1,3 +1,5 @@
+import { HTTPMethod, type Router } from '@webexdx/koa-wrap/server';
+import { authMiddleware } from '../../middlewares/auth.middleware';
 import {
   getSelfInfo,
   sendEmailForVerification,
@@ -5,8 +7,6 @@ import {
   signUp,
   verifyEmailVerificationOTP,
 } from './user.controller';
-import { Router, HTTPMethod } from '@webexdx/koa-wrap/server';
-import { authMiddleware } from '../../middlewares/auth.middleware';
 
 const router: Router = [
   {

@@ -1,5 +1,5 @@
-import { ObjectId } from '@i/common.interface';
-import {
+import type { ObjectId } from '@i/common.interface';
+import type {
   GetRoleInfoParams as GetRoleInfoRepositoryParams,
   GetRoleInfoResult as GetRoleInfoRepositoryResult,
   ModuleName,
@@ -54,20 +54,20 @@ export interface RoleServiceInterface {
    * Gets module-specific role information for a user
    */
   getModuleRoleInfo<ModuleNameT extends ModuleName>(
-    params: GetModulePermissionInfoParams<ModuleNameT>
+    params: GetModulePermissionInfoParams<ModuleNameT>,
   ): Promise<GetModulePermissionInfoResult<ModuleNameT>>;
 
   /**
    * Creates a role for a non-verified user
    */
   createNonVerifiedUserRole(
-    params: CreateNonVerifiedUserRole
+    params: CreateNonVerifiedUserRole,
   ): Promise<ObjectId>;
 
   /**
    * Disables email verification access for a user
    */
   disableEmailVerificationAccess(
-    params: DisableEmailVerificationAccess
+    params: DisableEmailVerificationAccess,
   ): Promise<void>;
 }

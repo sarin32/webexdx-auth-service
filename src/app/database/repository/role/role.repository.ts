@@ -1,4 +1,6 @@
-import {
+import type { ObjectId } from 'mongodb';
+import { roleModal } from '../../modals';
+import type {
   CreateRoleParams,
   GetModulePermissionInfoParams,
   GetModulePermissionInfoResult,
@@ -7,8 +9,6 @@ import {
   ModuleName,
   RoleRepositoryInterface,
 } from './role.repository.interface';
-import { roleModal } from '../../modals';
-import { ObjectId } from 'mongodb';
 
 class RoleRepository implements RoleRepositoryInterface {
   modal = roleModal;
@@ -61,7 +61,7 @@ class RoleRepository implements RoleRepositoryInterface {
           'permissions.emailVerification.send': false,
           'permissions.emailVerification.verify': false,
         },
-      }
+      },
     );
 
     if (!response.acknowledged || response.modifiedCount !== 1) {

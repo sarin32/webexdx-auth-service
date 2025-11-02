@@ -1,7 +1,7 @@
-import { Filter, UpdateFilter } from 'mongodb';
+import type { Filter, UpdateFilter } from 'mongodb';
 import { emailVerificationModal } from '../../modals';
-import { EmailVerificationSchema } from '../../modals/email-verification.modal.interface';
-import {
+import type { EmailVerificationSchema } from '../../modals/email-verification.modal.interface';
+import type {
   CreateEmailVerificationParams,
   EmailVerificationRepositoryInterface,
   GetEmailVerificationParams,

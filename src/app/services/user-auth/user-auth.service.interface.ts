@@ -1,4 +1,4 @@
-import { ObjectId } from '@i/common.interface';
+import type { ObjectId } from '@i/common.interface';
 
 /**
  * Parameters for user signup

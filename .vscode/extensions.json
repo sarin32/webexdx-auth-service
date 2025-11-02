@@ -1,11 +1,10 @@
 {
-	"recommendations": [
-		"chakrounanas.turbo-console-log",
-		"humao.rest-client",
-		"johnpapa.vscode-peacock",
-		"xabikos.javascriptsnippets",
-		"eamodio.gitlens",
-		"dbaeumer.vscode-eslint",
-		"teabyii.ayu"
-	]
+  "recommendations": [
+    "chakrounanas.turbo-console-log",
+    "humao.rest-client",
+    "johnpapa.vscode-peacock",
+    "xabikos.javascriptsnippets",
+    "eamodio.gitlens",
+    "teabyii.ayu"
+  ]
 }

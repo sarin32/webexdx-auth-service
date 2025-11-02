@@ -1,17 +1,17 @@
-import {
+import type { ObjectId } from '@i/common.interface';
+import { roleRepository } from '../../database';
+import type { RolePermissions } from '../../database/modals/roles.modal.interface';
+import type {
   GetRoleInfoParams,
   GetRoleInfoResult,
 } from '../../database/repository/role/role.repository.interface';
-import {
+import type {
   CreateNonVerifiedUserRole,
   DisableEmailVerificationAccess,
   GetModulePermissionInfoParams,
   GetModulePermissionInfoResult,
   RoleServiceInterface,
 } from './roles.service.interface';
-import { roleRepository } from '../../database';
-import { RolePermissions } from '../../database/modals/roles.modal.interface';
-import { ObjectId } from '@i/common.interface';
 
 class RolesService implements RoleServiceInterface {
   repository = roleRepository;

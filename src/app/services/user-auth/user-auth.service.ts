@@ -1,13 +1,6 @@
-import {
-  GenerateLoginTokenParams,
-  SignInParams,
-  SignupParams,
-  SignupResult,
-  UserAuthServiceInterface,
-} from './user-auth.service.interface';
+import { AuthorizationError, ConflictError } from '@webexdx/koa-wrap/errors';
 import { LOGIN_TOKEN_LIFETIME } from '../../config/config';
 import { userRepository } from '../../database';
-import { AuthorizationError, ConflictError } from '@webexdx/koa-wrap/errors';
 import {
   generatePassword,
   generateSalt,
@@ -15,6 +8,13 @@ import {
 } from '../../utils/password-util';
 import { generateSignature } from '../../utils/token-util';
 import { rolesService } from '../roles/roles.service';
+import type {
+  GenerateLoginTokenParams,
+  SignInParams,
+  SignupParams,
+  SignupResult,
+  UserAuthServiceInterface,
+} from './user-auth.service.interface';
 
 class UserAuthService implements UserAuthServiceInterface {
   private readonly repository = userRepository;
@@ -52,7 +52,7 @@ class UserAuthService implements UserAuthServiceInterface {
     const isValidPassword = await validatePassword(
       password,
       user.password,
-      user.salt
+      user.salt,
     );
     if (!isValidPassword) throw new AuthorizationError('Invalid Credenials');
 

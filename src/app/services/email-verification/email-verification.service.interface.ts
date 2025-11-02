@@ -1,4 +1,4 @@
-import { ObjectId } from '@i/common.interface';
+import type { ObjectId } from '@i/common.interface';
 
 /**
  * Parameters for sending email verification
@@ -54,34 +54,34 @@ export interface EmailVerificationServiceInterface {
    * Checks if a user has permission to send email verification
    */
   hasAccessToSendEmailVerificationEmail(
-    params: HasAccessParams
+    params: HasAccessParams,
   ): Promise<boolean>;
 
   /**
    * Checks if a user has permission to verify email OTP
    */
   hasAccessToVerifyEmailVerificationOTP(
-    params: HasAccessParams
+    params: HasAccessParams,
   ): Promise<boolean>;
 
   /**
    * Initiates the email verification process for a user
    */
   sendEmailForVerification(
-    params: SendEmailForVerificationParams
+    params: SendEmailForVerificationParams,
   ): Promise<void>;
 
   /**
    * Verifies the OTP code for email verification
    */
   verifyEmailVerificationOTP(
-    params: VerifyEmailVerificationOTPParams
+    params: VerifyEmailVerificationOTPParams,
   ): Promise<VerifyEmailVerificationOTPResult>;
 
   /**
    * Sends the verification email with OTP
    */
   sendEmailVerificationEmail(
-    params: SendEmailVerificationEmailParams
+    params: SendEmailVerificationEmailParams,
   ): Promise<void>;
 }

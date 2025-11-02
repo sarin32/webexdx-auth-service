@@ -1,11 +1,12 @@
 import { bodyParser } from '@koa/bodyparser';
 import cors from '@koa/cors';
-import { PORT } from '../config/config';
 import { errorMiddleware } from '@webexdx/koa-wrap/middlewares';
-import { connection } from '../database';
-import logger from 'koa-logger';
 import { Server } from '@webexdx/koa-wrap/server';
+import logger from 'koa-logger';
 import router from '../api';
+import { PORT } from '../config/config';
+import { connection } from '../database';
+
 const loggerMiddleware = logger();
 const corsMiddleware = cors({
   allowMethods: ['GET', 'POST'],

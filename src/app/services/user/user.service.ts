@@ -1,5 +1,5 @@
+import type { ObjectId } from '@i/common.interface';
 import { userRepository } from '../../database';
-import { ObjectId } from '@i/common.interface';
 
 type getUserInfoParams = {
   userId: ObjectId;

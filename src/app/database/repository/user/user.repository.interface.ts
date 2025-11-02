@@ -1,5 +1,5 @@
-import { ObjectId, WithId } from 'mongodb';
-import { UserSchema } from '../../modals/user.modal.interface';
+import type { ObjectId, WithId } from 'mongodb';
+import type { UserSchema } from '../../modals/user.modal.interface';
 
 /**
  * Parameters for creating a new user
@@ -52,7 +52,7 @@ export interface UserRepositoryInterface {
    * Finds a user by their email address
    */
   findUserByEmail(
-    params: FindUserByEmailParams
+    params: FindUserByEmailParams,
   ): Promise<WithId<UserSchema> | null>;
 
   /**
