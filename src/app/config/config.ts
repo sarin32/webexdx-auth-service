@@ -5,7 +5,7 @@ dotEnv.config();
 
 const env = process.env;
 
-export const ALLOWED_ORIGINS = env.CLIENT_URL
+export const ALLOWED_ORIGINS = env.CLIENT_URL;
 
 export const PORT = Number(env.PORT);
 
