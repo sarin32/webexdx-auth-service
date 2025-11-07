@@ -27,10 +27,11 @@ export async function setTokenCookie(
   ctx: Context,
   accessToken: string,
 ): Promise<void> {
-  ctx.cookies.set('access_token', accessToken, {
+  ctx.cookies.set(COOKIE_SETTINGS.ACCESS_TOKEN_KEY, accessToken, {
     httpOnly: COOKIE_SETTINGS.HTTP_ONLY,
     secure: COOKIE_SETTINGS.SECURE,
     domain: COOKIE_SETTINGS.DOMAIN,
     path: COOKIE_SETTINGS.PATH,
+    maxAge: COOKIE_SETTINGS.MAX_AGE, // 7 days
   });
 }

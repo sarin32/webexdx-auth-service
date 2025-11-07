@@ -4,12 +4,14 @@ import { errorMiddleware } from '@webexdx/koa-wrap/middlewares';
 import { Server } from '@webexdx/koa-wrap/server';
 import logger from 'koa-logger';
 import router from '../api';
-import { PORT } from '../config/config';
+import { ALLOWED_ORIGINS, PORT } from '../config';
 import { connection } from '../database';
 
 const loggerMiddleware = logger();
 const corsMiddleware = cors({
+  origin: ALLOWED_ORIGINS, // Specify the allowed origin
   allowMethods: ['GET', 'POST'],
+  credentials: true,
 });
 const bodyparserMiddleware = bodyParser();
 

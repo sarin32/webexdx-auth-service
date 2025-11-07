@@ -5,6 +5,8 @@ dotEnv.config();
 
 const env = process.env;
 
+export const ALLOWED_ORIGINS = env.CLIENT_URL
+
 export const PORT = Number(env.PORT);
 
 export const NODE_ENV = env.NODE_ENV;
@@ -28,4 +30,5 @@ export const COOKIE_SETTINGS = {
   SECURE: env.COOKIE_SECURE === 'true',
   DOMAIN: env.COOKIE_DOMAIN,
   PATH: env.COOKIE_PATH,
+  MAX_AGE: LOGIN_TOKEN_LIFETIME * 1000,
 };

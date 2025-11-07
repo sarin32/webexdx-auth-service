@@ -1,10 +1,10 @@
 import { ForbiddenError } from '@webexdx/koa-wrap/errors';
 import type { Context } from 'koa';
-import { COOKIE_SETTINGS } from '../../config';
 import { emailVerificationService } from '../../services/email-verification/email-verification.service';
 import { userService } from '../../services/user/user.service';
 import { userAuthService } from '../../services/user-auth/user-auth.service';
 import { validateRequest } from '../../utils/schema-validator';
+import { setTokenCookie } from '../../utils/token-util';
 import {
   signInSchema,
   signUpSchema,
@@ -18,7 +18,9 @@ export async function signUp(ctx: Context) {
     password: string;
   }>(signUpSchema, ctx.request.body);
 
-  ctx.body = await userAuthService.signup({ name, email, password });
+  const response = await userAuthService.signup({ name, email, password });
+  setTokenCookie(ctx, response.token);
+  ctx.body = response;
 }
 
 export async function signIn(ctx: Context) {
@@ -28,12 +30,7 @@ export async function signIn(ctx: Context) {
   }>(signInSchema, ctx.request.body);
 
   const response = await userAuthService.signIn({ email, password });
-  ctx.cookies.set('access_token', response.token, {
-    httpOnly: COOKIE_SETTINGS.HTTP_ONLY,
-    secure: COOKIE_SETTINGS.SECURE,
-    domain: COOKIE_SETTINGS.DOMAIN,
-    path: COOKIE_SETTINGS.PATH,
-  });
+  setTokenCookie(ctx, response.token);
   ctx.body = response;
 }
 
@@ -72,10 +69,12 @@ export async function verifyEmailVerificationOTP(ctx: Context) {
     );
   }
 
-  ctx.body = await emailVerificationService.verifyEmailVerificationOTP({
+  const response = await emailVerificationService.verifyEmailVerificationOTP({
     userId,
     otp,
   });
+  setTokenCookie(ctx, response.token);
+  ctx.body = response;
 }
 
 export async function getSelfInfo(ctx: Context) {
