@@ -1,41 +1,36 @@
-# Stage 1: Builder
+# ---- Stage 1: builder ----
 FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Copy dependency manifests and install all dependencies
-COPY package*.json ./
-RUN npm install
+# enable pnpm without global npm install
+ENV corepack_enable_download_prompt=0
+RUN corepack enable
 
-# Copy the full source code
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
 COPY . .
 
-# Build the app (assuming this produces a /build directory)
-RUN npm run build:prod
+RUN pnpm run build:prod
 
-# Stage 2: Production image
+
+# ---- Stage 2: runtime ----
 FROM node:22-alpine AS final
 
-# Create working directory
 WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=3000
 
-# Copy only the production build from builder stage
-COPY --from=builder /app/build ./
+ENV corepack_enable_download_prompt=0
+RUN corepack enable
 
-# If assets are needed separately, copy them too
-COPY --from=builder /app/src/assets ./src/assets
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --prod --frozen-lockfile
 
-# Copy package.json and lock file
-COPY package*.json ./
-
-# Install only production dependencies
-RUN npm install --only=production
+COPY --from=builder /app/build ./build
 
 COPY .env ./
 
-# Environment setup
-ENV PORT=3000
-EXPOSE $PORT
-
-# Start the app
-CMD ["npm", "run", "start:prod"]
+EXPOSE ${PORT}
+CMD ["pnpm","run","start:prod"]

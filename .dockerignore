@@ -1,10 +1,13 @@
-node_modules
-build
-.dockerignore
+# Ignore Git-related files
+.git
 .gitignore
 .github
+# Ignore Biome and Markdown files
+.biome.json
+*.md
+# Ignore IDE and build-related files`
 .vscode
-.git
-README.md
-Dockerfile
-Dockerfile.dev
+# Ignore dependencies and build outputs
+node_modules
+build
+logs
