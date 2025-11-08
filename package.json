@@ -2,9 +2,9 @@
   "scripts": {
     "lint": "biome check",
     "fix": "biome check --write",
-    "build": "tsc && copyfiles -u 1 \"src/assets/**/*\" build/src/assets",
+    "build": "tsc && copyfiles -u 1 \"src/assets/**/*\" build/src",
     "start": "nodemon src/index.ts",
-    "build:prod": "tsc && copyfiles -u 1 \"src/assets/**/*\" build/src/assets",
+    "build:prod": "tsc && copyfiles -u 1 \"src/assets/**/*\" build/src",
     "start:prod": "pm2-runtime build/src/index.js --name auth-service"
   },
   "engines": {
