@@ -7,10 +7,7 @@ import type {
 /**
  * Parameters for getting role information
  */
-export interface GetRoleInfoParams {
-  /** ID of the role to get information for */
-  roleId: ObjectId;
-}
+export type GetRoleInfoParams = Pick<RolesSchema, 'roleId'>;
 
 /**
  * Type representing all available module names
@@ -22,7 +19,7 @@ export type ModuleName = keyof RoleModalPermissions;
  */
 export interface GetModulePermissionInfoParams<ModuleNameT extends ModuleName> {
   /** ID of the user to check permissions for */
-  userId: ObjectId;
+  userId: RolesSchema["userId"];
   /** Name of the module to check permissions for */
   module: ModuleNameT;
 }
@@ -48,7 +45,7 @@ export type GetRoleInfoResult = WithId<RolesSchema>;
  */
 export interface CreateRoleParams {
   /** ID of the user to create role for */
-  userId: ObjectId;
+  userId: RolesSchema["userId"];
   /** Permissions to assign to the role */
   permissions: RolePermissions;
 }
@@ -72,5 +69,5 @@ export interface RoleRepositoryInterface {
   /**
    * Disables email verification access for a user
    */
-  disableEmailVerificationAccess(userId: ObjectId): Promise<void>;
+  disableEmailVerificationAccess(userId: RolesSchema['userId']): Promise<void>;
 }

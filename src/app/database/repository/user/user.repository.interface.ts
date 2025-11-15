@@ -4,23 +4,17 @@ import type { UserSchema } from '../../modals/user.modal.interface';
 /**
  * Parameters for creating a new user
  */
-export type CreateUserParams = {
-  /** User's email address */
-  email: string;
-  /** User's full name */
-  name: string;
-  /** Hashed user password */
-  password: string;
-  /** Salt used for password hashing */
-  salt: string;
-};
+export type CreateUserParams = Pick<
+  UserSchema,
+  | 'name' | 'password' | 'salt'
+> & { email: UserSchema["email"]['value'] };
 
 /**
  * Parameters for finding a user by email
  */
 export type FindUserByEmailParams = {
   /** Email address to search for */
-  email: string;
+  email: UserSchema["email"]['value'];
 };
 
 /**
@@ -28,7 +22,7 @@ export type FindUserByEmailParams = {
  */
 export type FindUserByIdParams = {
   /** User's ID to search for */
-  id: ObjectId;
+  id: UserSchema['userId'];
 };
 
 /**
@@ -36,7 +30,7 @@ export type FindUserByIdParams = {
  */
 export interface MarkUserAsVerifiedParams {
   /** ID of the user to mark as verified */
-  userId: ObjectId;
+  userId: UserSchema['userId'];
 }
 
 /**

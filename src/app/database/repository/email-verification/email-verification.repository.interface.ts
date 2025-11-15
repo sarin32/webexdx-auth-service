@@ -4,33 +4,26 @@ import type { EmailVerificationSchema } from '../../modals/email-verification.mo
 /**
  * Parameters for creating an email verification record
  */
-export interface CreateEmailVerificationParams {
-  /** ID of the user requesting verification */
-  userId: ObjectId;
-  /** OTP code for verification */
-  otp: string;
-  /** Email address to verify */
-  email: string;
-}
+export type CreateEmailVerificationParams = Pick<
+  EmailVerificationSchema,
+  'userId' | 'otp' | 'email'
+>;
 
 /**
  * Parameters for getting email verification information
  */
-export interface GetEmailVerificationParams {
-  /** ID of the user to get verification for */
-  userId: ObjectId;
-}
+export type GetEmailVerificationParams = Pick<
+  EmailVerificationSchema,
+  'userId'
+>;
 
 /**
  * Parameters for updating a verification record
  */
-export interface UpdateVerificationByIdParams {
-  /** ID of the verification record to update */
-  id: ObjectId;
-  /** Whether to increment the verification try count */
+export type UpdateVerificationByIdParams = {
+  id: EmailVerificationSchema["userId"];
   incrementVerificationTry: boolean;
-  /** Optional new OTP to set */
-  otp?: string;
+  otp?: EmailVerificationSchema["otp"];
 }
 
 /**
