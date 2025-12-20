@@ -19,7 +19,7 @@ export type ModuleName = keyof RoleModalPermissions;
  */
 export interface GetModulePermissionInfoParams<ModuleNameT extends ModuleName> {
   /** ID of the user to check permissions for */
-  userId: RolesSchema["userId"];
+  userId: RolesSchema['userId'];
   /** Name of the module to check permissions for */
   module: ModuleNameT;
 }
@@ -45,7 +45,7 @@ export type GetRoleInfoResult = WithId<RolesSchema>;
  */
 export interface CreateRoleParams {
   /** ID of the user to create role for */
-  userId: RolesSchema["userId"];
+  userId: RolesSchema['userId'];
   /** Permissions to assign to the role */
   permissions: RolePermissions;
 }

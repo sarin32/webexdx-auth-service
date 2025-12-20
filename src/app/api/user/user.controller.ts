@@ -4,7 +4,8 @@ import { emailVerificationService } from '../../services/email-verification/emai
 import { userService } from '../../services/user/user.service';
 import { userAuthService } from '../../services/user-auth/user-auth.service';
 import { validateRequest } from '../../utils/schema-validator';
-import { setTokenCookie } from '../../utils/token-util';
+import { resetCookie, setTokenCookie } from '../../utils/token-util';
+
 import {
   signInSchema,
   signUpSchema,
@@ -80,4 +81,10 @@ export async function verifyEmailVerificationOTP(ctx: Context) {
 export async function getSelfInfo(ctx: Context) {
   const { userId } = ctx.state.user;
   ctx.body = await userService.getUserInfo({ userId });
+}
+
+export async function logout(ctx: Context) {
+  resetCookie(ctx);
+  ctx.status = 200;
+  ctx.body = { message: 'Logged out successfully' };
 }

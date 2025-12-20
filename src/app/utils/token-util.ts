@@ -35,3 +35,13 @@ export async function setTokenCookie(
     maxAge: COOKIE_SETTINGS.MAX_AGE, // 7 days
   });
 }
+
+export async function resetCookie(ctx: Context): Promise<void> {
+  ctx.cookies.set(COOKIE_SETTINGS.ACCESS_TOKEN_KEY, '', {
+    httpOnly: COOKIE_SETTINGS.HTTP_ONLY,
+    secure: COOKIE_SETTINGS.SECURE,
+    domain: COOKIE_SETTINGS.DOMAIN,
+    path: COOKIE_SETTINGS.PATH,
+    maxAge: 0,
+  });
+}

@@ -2,6 +2,7 @@ import { HTTPMethod, type Router } from '@webexdx/koa-wrap/server';
 import { authMiddleware } from '../../middlewares/auth.middleware';
 import {
   getSelfInfo,
+  logout,
   sendEmailForVerification,
   signIn,
   signUp,
@@ -9,6 +10,11 @@ import {
 } from './user.controller';
 
 const router: Router = [
+  {
+    method: HTTPMethod.POST,
+    path: '/logout',
+    handler: logout,
+  },
   {
     method: HTTPMethod.POST,
     path: '/signup',

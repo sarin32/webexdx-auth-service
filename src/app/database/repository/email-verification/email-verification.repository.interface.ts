@@ -21,10 +21,10 @@ export type GetEmailVerificationParams = Pick<
  * Parameters for updating a verification record
  */
 export type UpdateVerificationByIdParams = {
-  id: EmailVerificationSchema["userId"];
+  id: EmailVerificationSchema['userId'];
   incrementVerificationTry: boolean;
-  otp?: EmailVerificationSchema["otp"];
-}
+  otp?: EmailVerificationSchema['otp'];
+};
 
 /**
  * Interface defining the email verification repository contract

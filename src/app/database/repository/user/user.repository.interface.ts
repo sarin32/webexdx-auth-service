@@ -6,15 +6,15 @@ import type { UserSchema } from '../../modals/user.modal.interface';
  */
 export type CreateUserParams = Pick<
   UserSchema,
-  | 'name' | 'password' | 'salt'
-> & { email: UserSchema["email"]['value'] };
+  'name' | 'password' | 'salt'
+> & { email: UserSchema['email']['value'] };
 
 /**
  * Parameters for finding a user by email
  */
 export type FindUserByEmailParams = {
   /** Email address to search for */
-  email: UserSchema["email"]['value'];
+  email: UserSchema['email']['value'];
 };
 
 /**
