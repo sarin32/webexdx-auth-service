@@ -11,7 +11,10 @@ import logger from '../utils/logger';
 
 const corsMiddleware = cors({
   credentials: true,
-  origin: ALLOWED_ORIGINS,
+  origin: (ctx) => {
+    const origin = ctx.get('Origin');
+    return ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  },
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
 });
 const bodyparserMiddleware = bodyParser();
