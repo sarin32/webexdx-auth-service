@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1.4
+
 # ---- Stage 1: builder ----
 FROM node:22-alpine AS builder
 
@@ -7,10 +9,13 @@ WORKDIR /app
 ENV corepack_enable_download_prompt=0
 RUN corepack enable
 
-ENV PNPM_STORE_PATH=/pnpm/store
+# Configure pnpm to use cache directory
+RUN pnpm config set store-dir /pnpm/store
 
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+# Use BuildKit cache mount for pnpm store
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
+    pnpm install --frozen-lockfile
 
 COPY . .
 
@@ -27,8 +32,13 @@ ENV PORT=3000
 ENV corepack_enable_download_prompt=0
 RUN corepack enable
 
+# Configure pnpm to use cache directory
+RUN pnpm config set store-dir /pnpm/store
+
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --prod --frozen-lockfile
+# Use BuildKit cache mount for pnpm store
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
+    pnpm install --prod --frozen-lockfile
 
 COPY --from=builder /app/build ./build
 
