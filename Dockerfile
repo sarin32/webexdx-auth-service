@@ -40,7 +40,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
     pnpm install --prod --frozen-lockfile
 
-COPY --from=builder /app/build ./build
+COPY --from=builder /app/build .
 
 COPY .env ./
 

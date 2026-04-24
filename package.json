@@ -5,7 +5,7 @@
     "build": "tsc && copyfiles -u 1 \"src/assets/**/*\" build/src",
     "start": "nodemon src/index.ts",
     "build:prod": "tsc && copyfiles -u 1 \"src/assets/**/*\" build/src",
-    "start:prod": "pm2-runtime build/src/index.js --name auth-service"
+    "start:prod": "pm2-runtime src/index.js --name auth-service"
   },
   "engines": {
     "node": ">=22"
