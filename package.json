@@ -31,7 +31,7 @@
     "-": "^0.0.1",
     "@koa/bodyparser": "^5.0.0",
     "@koa/cors": "^5.0.0",
-    "@webexdx/koa-wrap": "^1.5.1",
+    "@webexdx/koa-wrap": "^2.0.0",
     "bcrypt": "^6.0.0",
     "copyfiles": "^2.4.1",
     "d": "^1.0.2",
@@ -43,9 +43,7 @@
     "mongodb": "^6.12.0",
     "nodemailer": "^6.9.16",
     "pm2": "^6.0.8",
-    "source-map-support": "^0.5.21",
-    "winston": "^3.18.3",
-    "winston-daily-rotate-file": "^5.0.0"
+    "source-map-support": "^0.5.21"
   },
   "packageManager": "pnpm@10.17.0"
 }

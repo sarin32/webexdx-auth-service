@@ -1,6 +1,8 @@
-import { Kafka, type Producer } from 'kafkajs';
+import { Kafka, logLevel, type Producer } from 'kafkajs';
 import { KAFKA_SETTINGS, NODE_ENV } from '../config/config';
-import logger from '../utils/logger';
+import baseLogger from '../utils/logger';
+
+const logger = baseLogger.child({ module: 'kafka-service' });
 
 class KafkaService {
   private kafka: Kafka;
@@ -11,8 +13,31 @@ class KafkaService {
     this.kafka = new Kafka({
       clientId: `auth-service-${NODE_ENV}`,
       brokers: KAFKA_SETTINGS.BROKERS,
+      logCreator: () => {
+        return ({ namespace, level, label, log }) => {
+          const { message, ...extra } = log;
+          const winstonLevel = this.toWinstonLogLevel(level);
+          logger[winstonLevel](`${label} [${namespace}] ${message}`, extra);
+        };
+      },
     });
     this.producer = this.kafka.producer();
+  }
+
+  private toWinstonLogLevel(level: logLevel) {
+    switch (level) {
+      case logLevel.ERROR:
+      case logLevel.NOTHING:
+        return 'error';
+      case logLevel.WARN:
+        return 'warn';
+      case logLevel.INFO:
+        return 'info';
+      case logLevel.DEBUG:
+        return 'debug';
+      default:
+        return 'info';
+    }
   }
 
   async connect() {
@@ -34,9 +59,9 @@ class KafkaService {
           },
         ],
       });
-      console.log(`Message produced to topic ${topic}`);
+      logger.info(`Message produced to topic ${topic}`);
     } catch (error) {
-      console.error(`Error producing message to topic ${topic}:`, error);
+      logger.error(`Error producing message to topic ${topic}:`, error);
       throw error;
     }
   }
@@ -45,7 +70,7 @@ class KafkaService {
     if (this.isConnected) {
       await this.producer.disconnect();
       this.isConnected = false;
-      console.log('Kafka Producer disconnected');
+      logger.info('Kafka Producer disconnected');
     }
   }
 }

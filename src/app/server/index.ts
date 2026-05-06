@@ -1,15 +1,16 @@
 import { bodyParser } from '@koa/bodyparser';
 import cors from '@koa/cors';
+import {
+  errorMiddleware as errorMWGenerator,
+  requestId,
+} from '@webexdx/koa-wrap/middlewares';
 import { Server } from '@webexdx/koa-wrap/server';
 import router from '../api';
 import { ALLOWED_ORIGINS, PORT } from '../config';
 import { connection } from '../database';
-
-import errorMiddleware from '../middlewares/error.middleware';
 import httpLoggerMiddleware from '../middlewares/http-logger.middleware';
-import logger from '../utils/logger';
 import kafkaService from '../services/kafka-service';
-
+import logger from '../utils/logger';
 
 const corsMiddleware = cors({
   credentials: true,
@@ -20,11 +21,14 @@ const corsMiddleware = cors({
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
 });
 const bodyparserMiddleware = bodyParser();
+const errorMiddleware = errorMWGenerator();
+const requestIdMiddleware = requestId({ logger });
 
 const server = new Server({
   port: PORT,
   routes: router,
   middlewares: [
+    requestIdMiddleware,
     httpLoggerMiddleware,
     corsMiddleware,
     bodyparserMiddleware,
@@ -39,7 +43,6 @@ const server = new Server({
     await kafkaService.connect();
     logger.info('ESTABLISHED KAFKA CONNECTION');
   },
-
 });
 
 export async function startServer() {
