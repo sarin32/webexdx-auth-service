@@ -24,6 +24,12 @@ export const EMAIL_SETTINGS = {
   PASSWORD: env.EMAIL_PASSWORD,
 };
 
+export const KAFKA_SETTINGS = {
+  BROKERS: (env.KAFKA_BROKERS || 'localhost:9092').split(','),
+  EMAIL_TOPIC: env.KAFKA_EMAIL_TOPIC || 'email-commands',
+};
+
+
 export const COOKIE_SETTINGS = {
   ACCESS_TOKEN_KEY: 'access_token',
   HTTP_ONLY: env.COOKIE_HTTP_ONLY === 'true',

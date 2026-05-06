@@ -8,6 +8,8 @@ import { connection } from '../database';
 import errorMiddleware from '../middlewares/error.middleware';
 import httpLoggerMiddleware from '../middlewares/http-logger.middleware';
 import logger from '../utils/logger';
+import kafkaService from '../services/kafka-service';
+
 
 const corsMiddleware = cors({
   credentials: true,
@@ -34,7 +36,10 @@ const server = new Server({
   preStartCb: async () => {
     await connection.startConnecion();
     logger.info('ESTABLISHED DATABASE CONNECTION');
+    await kafkaService.connect();
+    logger.info('ESTABLISHED KAFKA CONNECTION');
   },
+
 });
 
 export async function startServer() {
